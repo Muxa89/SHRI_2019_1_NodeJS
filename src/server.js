@@ -1,24 +1,24 @@
 const fs = require('fs');
 
-function getRepoDir() {
-  const repoDir = process.argv[2];
+function getRootDir() {
+  const rootDir = process.argv[2];
 
-  if (!repoDir) {
-    console.error('Repository path not specified.');
+  if (!rootDir) {
+    console.error('Repository root path not specified.');
     console.error('Usage: node server.js <repository-path>');
     return false;
-  } else if (!fs.existsSync(repoDir)) {
-    console.error('Specified repository path not exists on file system.');
+  } else if (!fs.existsSync(rootDir)) {
+    console.error('Specified repository root path not exists on file system.');
     console.error('Provide correct path.')
     return false;
   }
 
-  return repoDir;
+  return rootDir;
 }
 
 function main() {
-  const repoDir = getRepoDir();
-  if (!repoDir) {
+  const rootDir = getRootDir();
+  if (!rootDir) {
     return;
   }
 }
