@@ -22,6 +22,12 @@ function getRootDir() {
   return path.resolve(rootDir);
 }
 
+function getGitDir(folder, callback) {
+  execFile('git', ['-C', folder, 'rev-parse', '--git-dir'], (err, out) => {
+    callback(err, out.replace(/^\s|\s$/g, ''));
+  });
+}
+
 function getAllRepositories(root, resultCallback) {
   fs.readdir(root, (err, files) => {
     async.filter(files, (file, truthCallback) => {
@@ -30,12 +36,26 @@ function getAllRepositories(root, resultCallback) {
       });
     }, (err, folders) => {
       async.filter(folders, (folder, truthCallback) => {
-        execFile('git', ['-C', path.resolve(root, folder), 'rev-parse', '--git-dir'], (err, out) => {
+        getGitDir(path.resolve(root, folder), (err, out) => {
           truthCallback(null, !err);
-        });
+        })
       }, (err, repos) => {
         resultCallback(repos);
       });
+    });
+  });
+}
+
+function getCommitList(folder, hash, callback) {
+  getGitDir(folder, (err, gitFolder) => {
+    execFile('git', ['--no-pager', '--git-dir', path.resolve(folder, gitFolder), 'log', '--pretty=format:%H%n%ai%n%s%n', hash], (err, out) => {
+      const lines = out.split('\n');
+      const res = [];
+      while (lines.length > 0) {
+        const [hash, creationDate, subject, newline] = lines.splice(0, 4);
+        res.push({ hash, creationDate, subject });
+      }
+      callback(null, res);
     });
   });
 }
@@ -47,6 +67,12 @@ function startServer(root) {
     getAllRepositories(root, (repos) => {
       res.json(repos);
     })
+  });
+
+  app.get('/api/repos/:repositoryId/commits/:commitHash', (req, res) => {
+    getCommitList(path.resolve(root, req.params.repositoryId), req.params.commitHash, (err, commits) => {
+      res.json(commits);
+    });
   });
 
   const port = 3000;
