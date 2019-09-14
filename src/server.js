@@ -4,6 +4,8 @@ const { execFile } = require('child_process');
 
 const async = require('async');
 
+const express = require('express');
+
 function getRootDir() {
   const rootDir = process.argv[2];
 
@@ -38,6 +40,20 @@ function getAllRepositories(root, resultCallback) {
   });
 }
 
+function startServer(root) {
+  const app = express();
+
+  app.get('/api/repos', (req, res) => {
+    getAllRepositories(root, (repos) => {
+      res.json(repos);
+    })
+  });
+
+  const port = 3000;
+  app.listen(port);
+  console.log('Server is listening on ' + port);
+}
+
 function main() {
   const rootDir = getRootDir();
   if (!rootDir) {
@@ -46,9 +62,7 @@ function main() {
 
   console.log('Serving files from: ' + rootDir);
 
-  // getAllRepositories(rootDir, repos => {
-  //   console.log(repos);
-  // });
+  startServer(rootDir);
 }
 
 main();
