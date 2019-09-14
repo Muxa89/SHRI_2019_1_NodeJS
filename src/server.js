@@ -60,6 +60,14 @@ function getCommitList(folder, hash, callback) {
   });
 }
 
+function getCommitDiff(folder, hash, callback) {
+  getGitDir(folder, (err, gitFolder) => {
+    execFile('git', ['--git-dir', path.resolve(folder, gitFolder), 'show', hash], (err, out) => {
+      callback(err, out);
+    });
+  });
+}
+
 function startServer(root) {
   const app = express();
 
@@ -72,6 +80,12 @@ function startServer(root) {
   app.get('/api/repos/:repositoryId/commits/:commitHash', (req, res) => {
     getCommitList(path.resolve(root, req.params.repositoryId), req.params.commitHash, (err, commits) => {
       res.json(commits);
+    });
+  });
+
+  app.get('/api/repos/:repositoryId/commits/:commitHash/diff', (req, res) => {
+    getCommitDiff(path.resolve(root, req.params.repositoryId), req.params.commitHash, (err, diff) => {
+      res.json({ diff });
     });
   });
 
