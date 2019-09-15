@@ -104,6 +104,12 @@ function treeHandler(root) {
   };
 }
 
+function deleteRepository(folder, callback) {
+  fs.rmdir(folder, (err, stats) => {
+    callback(err, stats);
+  });
+}
+
 function startServer(root) {
   const app = express();
 
@@ -132,6 +138,22 @@ function startServer(root) {
   app.get('/api/repos/:repositoryId/blob/:commitHash/:pathToFile([a-zA-Z0-9_\\-/.]+)', (req, res) => {
     getBlobContent(path.resolve(root, req.params.repositoryId), req.params.commitHash, req.params.pathToFile, (content) => {
       res.json({ content });
+    });
+  });
+
+  app.delete('/api/repos/:repositoryId', (req, res) => {
+    deleteRepository(path.resolve(root, req.params.repositoryId), (err, stats) => {
+      if (err) {
+        res.json({
+          status: "ERR",
+          message: err.errno === -4058 ? "Repository not found" : "Error occured during request"
+        });
+        return;
+      }
+
+      res.json({
+        status: "OK"
+      });
     });
   });
 

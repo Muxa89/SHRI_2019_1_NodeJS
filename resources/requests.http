@@ -19,3 +19,5 @@ http://localhost:3000/api/repos/front-end/tree/9c3dc02/Tests/AA-api-tests
 http://localhost:3000/api/repos/front-end/blob/9c3dc02/Tests/AA-api-tests/AA-api-tests.prj
 ###
 http://localhost:3000/api/repos/front-end/blob/9c3dc02/README.md
+###
+DELETE http://localhost:3000/api/repos/to_delete HTTP/1.1
