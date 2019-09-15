@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execFile } = require('child_process');
+const rimraf = require('rimraf');
 
 const async = require('async');
 
@@ -96,6 +97,20 @@ function getBlobContent(folder, hash, blobPath, callback) {
   });
 }
 
+function deleteRepository(folder, callback) {
+  rimraf(folder, (err) => {
+    callback(err);
+  });
+}
+
+function downloadNewRepository(root, url, callback) {
+  const urlParts = url.split('/');
+  const repoName = urlParts[urlParts.length - 1].replace(/\.git/g, '');
+  execFile('git', ['clone', url, path.resolve(root, repoName)], (err) => {
+    callback(err);
+  });
+}
+
 function treeHandler(root) {
   return (req, res) => {
     getRepositoryContent(path.resolve(root, req.params.repositoryId), req.params.commitHash, req.params.path, (err, files) => {
@@ -104,14 +119,9 @@ function treeHandler(root) {
   };
 }
 
-function deleteRepository(folder, callback) {
-  fs.rmdir(folder, (err, stats) => {
-    callback(err, stats);
-  });
-}
-
 function startServer(root) {
   const app = express();
+  app.use(express.json());
 
   app.get('/api/repos', (req, res) => {
     getAllRepositories(root, (repos) => {
@@ -153,6 +163,15 @@ function startServer(root) {
 
       res.json({
         status: "OK"
+      });
+    });
+  });
+
+  app.post('/api/repos', (req, res) => {
+    const { url } = req.body;
+    downloadNewRepository(root, url, (err) => {
+      res.json({
+        status: err ? "ERR" : "OK"
       });
     });
   });
