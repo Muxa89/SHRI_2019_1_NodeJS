@@ -68,6 +68,34 @@ function getCommitDiff(folder, hash, callback) {
   });
 }
 
+function getRepositoryContent(folder, hash, dirPath, callback) {
+  getGitDir(folder, (err, gitFolder) => {
+    execFile('git', ['--git-dir', path.resolve(folder, gitFolder), 'show', (hash || 'master') + ':' + (dirPath || '')], (err, out) => {
+      const lines = out.split('\n');
+      lines.splice(0, 2);
+      lines.splice(lines.length - 1, 1);
+      const files = lines.sort((a, b) => {
+        if (a.indexOf('/') !== -1 && b.indexOf('/') === -1) {
+          return -1;
+        } else if (a.indexOf('/') === -1 && b.indexOf('/') !== -1) {
+          return 1;
+        } else {
+          return (a < b) ? -1 : 1;
+        }
+      });
+      callback(err, files);
+    });
+  });
+}
+
+function treeHandler(root) {
+  return (req, res) => {
+    getRepositoryContent(path.resolve(root, req.params.repositoryId), req.params.commitHash, req.params.path, (err, files) => {
+      res.json(files);
+    });
+  };
+}
+
 function startServer(root) {
   const app = express();
 
@@ -88,6 +116,10 @@ function startServer(root) {
       res.json({ diff });
     });
   });
+
+  app.get('/api/repos/:repositoryId', treeHandler(root));
+  app.get('/api/repos/:repositoryId/tree/:commitHash', treeHandler(root));
+  app.get('/api/repos/:repositoryId/tree/:commitHash/:path([a-zA-Z0-9_\\-/]+)', treeHandler(root));
 
   const port = 3000;
   app.listen(port);
