@@ -88,6 +88,14 @@ function getRepositoryContent(folder, hash, dirPath, callback) {
   });
 }
 
+function getBlobContent(folder, hash, blobPath, callback) {
+  getGitDir(folder, (err, gitFolder) => {
+    execFile('git', ['--git-dir', path.resolve(folder, gitFolder), 'show', hash + ':' + blobPath], (err, out) => {
+      callback(out);
+    });
+  });
+}
+
 function treeHandler(root) {
   return (req, res) => {
     getRepositoryContent(path.resolve(root, req.params.repositoryId), req.params.commitHash, req.params.path, (err, files) => {
@@ -120,6 +128,12 @@ function startServer(root) {
   app.get('/api/repos/:repositoryId', treeHandler(root));
   app.get('/api/repos/:repositoryId/tree/:commitHash', treeHandler(root));
   app.get('/api/repos/:repositoryId/tree/:commitHash/:path([a-zA-Z0-9_\\-/]+)', treeHandler(root));
+
+  app.get('/api/repos/:repositoryId/blob/:commitHash/:pathToFile([a-zA-Z0-9_\\-/.]+)', (req, res) => {
+    getBlobContent(path.resolve(root, req.params.repositoryId), req.params.commitHash, req.params.pathToFile, (content) => {
+      res.json({ content });
+    });
+  });
 
   const port = 3000;
   app.listen(port);
