@@ -120,6 +120,40 @@ function downloadNewRepository(root, url, callback) {
   });
 }
 
+function walkDir(dir, fn, finishFn) {
+  async.each(fs.readdirSync(dir), (f, callback) => {
+    let dirPath = path.join(dir, f);
+    let isDirectory = fs.statSync(dirPath).isDirectory();
+    if (isDirectory) {
+      walkDir(dirPath, fn, () => {
+        callback();
+      });
+    } else {
+      fn(dirPath, callback);
+    }
+  }, (err) => {
+    finishFn();
+  });
+};
+
+function getCount(folder, resultCallback) {
+  let sum = 0;
+
+  //TODO not count blob files
+  walkDir(folder, (file, cb) => {
+    fs.createReadStream(file)
+      .on('data', chunk => {
+        sum += chunk.length;
+      })
+      .on('end', () => {
+        cb();
+      });
+  }, () => {
+    resultCallback(sum);
+  });
+}
+
+
 function treeHandler(root) {
   return (req, res) => {
     getRepositoryContent(path.resolve(root, req.params.repositoryId), req.params.commitHash, req.params.path, (err, files) => {
@@ -187,6 +221,14 @@ function startServer(root) {
     downloadNewRepository(root, url, (err) => {
       res.json({
         status: err ? "ERR" : "OK"
+      });
+    });
+  });
+
+  app.get('/api/repos/:repositoryId/count', (req, res) => {
+    getCount(path.resolve(root, req.params.repositoryId), (sum) => {
+      res.json({
+        symbolCount: sum
       });
     });
   });

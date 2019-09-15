@@ -33,3 +33,7 @@ Content-Type: application/json
   "url": "https://github.com/Muxa89/Finance.git"
 }
 ###
+http://localhost:3000/api/repos/front-end/count
+###
+http://localhost:3000/api/repos/Finance/count
+###
