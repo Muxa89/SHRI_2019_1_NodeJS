@@ -4,6 +4,10 @@ http://localhost:3000/api/repos/front-end/commits/master
 ###
 http://localhost:3000/api/repos/front-end/commits/d925652
 ###
+http://localhost:3000/api/repos/front-end/commits/d925652/page/start/0/limit/1
+###
+http://localhost:3000/api/repos/front-end/commits/d925652/page/start/1/limit/1
+###
 http://localhost:3000/api/repos/front-end/commits/d925652/diff
 ###
 http://localhost:3000/api/repos/front-end

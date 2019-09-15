@@ -48,8 +48,17 @@ function getAllRepositories(root, resultCallback) {
 }
 
 function getCommitList(folder, hash, callback) {
+  getCommitListWithPaging(folder, hash, undefined, undefined, callback);
+}
+
+function getCommitListWithPaging(folder, hash, start, limit, callback) {
   getGitDir(folder, (err, gitFolder) => {
-    execFile('git', ['--no-pager', '--git-dir', path.resolve(folder, gitFolder), 'log', '--pretty=format:%H%n%ai%n%s%n', hash], (err, out) => {
+    const params = ['--no-pager', '--git-dir', path.resolve(folder, gitFolder), 'log', '--pretty=format:%H%n%ai%n%s%n', hash];
+    if (start && limit) {
+      params.push('--skip', start, '-n', limit);
+    }
+
+    execFile('git', params, (err, out) => {
       const lines = out.split('\n');
       const res = [];
       while (lines.length > 0) {
@@ -59,7 +68,7 @@ function getCommitList(folder, hash, callback) {
       callback(null, res);
     });
   });
-}
+};
 
 function getCommitDiff(folder, hash, callback) {
   getGitDir(folder, (err, gitFolder) => {
@@ -126,11 +135,17 @@ function startServer(root) {
   app.get('/api/repos', (req, res) => {
     getAllRepositories(root, (repos) => {
       res.json(repos);
-    })
+    });
   });
 
   app.get('/api/repos/:repositoryId/commits/:commitHash', (req, res) => {
     getCommitList(path.resolve(root, req.params.repositoryId), req.params.commitHash, (err, commits) => {
+      res.json(commits);
+    });
+  });
+
+  app.get('/api/repos/:repositoryId/commits/:commitHash/page/start/:start/limit/:limit', (req, res) => {
+    getCommitListWithPaging(path.resolve(root, req.params.repositoryId), req.params.commitHash, req.params.start, req.params.limit, (err, commits) => {
       res.json(commits);
     });
   });
