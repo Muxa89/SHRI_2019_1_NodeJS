@@ -1,11 +1,11 @@
 html 
   head
     link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=PT+Sans&display=swap')
-    link(rel='stylesheet', href='/lib/highlight/styles/github.css')
-    script(src='/lib/highlight/highlight.pack.js')
-    script hljs.initHighlightingOnLoad();
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=PT+Mono&display=swap')
+    link(rel='stylesheet', href='/lib/prism/prism.css')
     link(rel='stylesheet', href='/css/main.css')
     link(rel='stylesheet', href='/css/adaptive.css')
+    script(src='/lib/prism/prism.js') 
     block head
   body
     include ./blocks/Header
@@ -15,4 +15,3 @@ html
       block main
 
     include ./blocks/Footer
-      

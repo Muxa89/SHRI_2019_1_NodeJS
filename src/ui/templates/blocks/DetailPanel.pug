@@ -1,0 +1,9 @@
+.DetailPanel
+  .DetailPanel-Header
+    .DetailPanel-FileIcon
+    .DetailPanel-FileName= item
+    .DetailPanel-FileSize= `(${size})`
+    .DetailPanel-DownloadButton
+  .DetailPanel-Preview
+    pre.line-numbers
+      code.language-python= content
