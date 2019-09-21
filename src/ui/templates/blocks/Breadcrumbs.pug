@@ -2,7 +2,6 @@
 div(class=Breadcrumbs)
   
   -for (let i = 0; i < breadcrumbsList.length; i++)
-    div(class=[`${Breadcrumbs}-Item`])= breadcrumbsList[i]
+    div(class=`${Breadcrumbs}-Item`)= breadcrumbsList[i]
     if i < breadcrumbsList.length - 1
-      -const Delimeter='Delimeter'
-      div(class=[Delimeter, `${Breadcrumbs}-${Delimeter}`])
+      div(class=`${Breadcrumbs}-Delimeter`) /

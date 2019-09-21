@@ -1,0 +1,31 @@
+.Breadcrumbs
+  width: 100%
+  padding: 
+    top: 12px
+    bottom: 10px
+  display: flex
+
+  font:
+    family: 'PT Sans'
+    size: 14px
+
+  &-Item
+    cursor: pointer
+    line-height: 20px
+
+  &-Item:not(:last-child)
+    color: #7F8285;
+
+  &-Item:last-child
+    font-weight: bold
+    color: black
+
+  &-Delimeter
+    $distance: 10px;
+    margin:
+      left: $distance
+      right: $distance
+
+
+
+  
