@@ -1,8 +1,4 @@
--const Footer = 'Footer'
-div(class=Footer)
-  -const Trademark = 'Trademark'
-  div(class=[Trademark, `${Footer}-${Trademark}`]) Trade secrets of Yandex LLC. 16, Lev Tolstoy Str., Moscow, Russia, 119021
-  -const UiVersion = 'UiVersion'
-  div(class=[UiVersion, `${Footer}-${UiVersion}`]) UI: 0.1.15
-  -const Copyright = 'Copyright'
-  div(class=[Copyright, `${Footer}-${Copyright}`]) © 2007—2019 Yandex
+.Footer
+  .Trademark.Footer-Trademark Trade secrets of Yandex LLC. 16, Lev Tolstoy Str., Moscow, Russia, 119021
+  .UiVersion.Footer-UiVersion UI: 0.1.15
+  .Copyright.Footer-Copyright © 2007—2019 Yandex

@@ -1,4 +1,3 @@
--const ViewSelector = 'ViewSelector'
-div(class=ViewSelector)
+.ViewSelector
   -for (let i = 0; i < viewSelectorList.length; i++)
-    div(class=`${ViewSelector}-Item`)= viewSelectorList[i].name
+    div(class={'ViewSelector-Item': true, 'ViewSelector-Item_selected': viewSelectorList[i].selected})= viewSelectorList[i].name

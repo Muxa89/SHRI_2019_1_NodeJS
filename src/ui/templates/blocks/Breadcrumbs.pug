@@ -1,7 +1,5 @@
--const Breadcrumbs='Breadcrumbs'
-div(class=Breadcrumbs)
-  
+.Breadcrumbs
   -for (let i = 0; i < breadcrumbsList.length; i++)
-    div(class=`${Breadcrumbs}-Item`)= breadcrumbsList[i]
+    .Breadcrumbs-Item= breadcrumbsList[i]
     if i < breadcrumbsList.length - 1
-      div(class=`${Breadcrumbs}-Delimeter`) /
+      .Breadcrumbs-Delimeter /

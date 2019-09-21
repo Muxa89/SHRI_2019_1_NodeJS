@@ -1,8 +1,4 @@
--const ItemAndBranchContainer = 'ItemAndBranchContainer'
-div(class=ItemAndBranchContainer)
-
-  -const SelectedItem = 'SelectedItem'
-  div(class=[SelectedItem, `${ItemAndBranchContainer}-${SelectedItem}`])= item
-
-  div(class=['BranchSelector', 'Selector'])= branch
-    div(class='Selector-ArrowDown')
+.ItemAndBranchContainer
+  .SelectedItem.ItemAndBranchContainer-SelectedItem= item
+  .BranchSelector.Selector= branch
+    .Selector-ArrowDown
