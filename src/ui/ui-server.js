@@ -7,6 +7,7 @@ const TEMPLATES_DIR = 'templates';
 const SASS_DIR = 'sass';
 const IMAGES_DIR = 'images';
 const CSS_DIR = 'dist/css';
+const LIB_DIR = 'lib';
 
 const app = express();
 
@@ -20,12 +21,18 @@ app.use(sassMiddleware({
 
 app.use('/img', express.static(resolve(UI_SRC_DIR, IMAGES_DIR)));
 app.use('/css', express.static(resolve(CSS_DIR)));
+app.use('/lib', express.static(resolve(LIB_DIR)));
 
 app.set('view engine', 'pug');
 app.get('/1440/1.1', (req, res) => res.render(resolve(UI_SRC_DIR, TEMPLATES_DIR, './1440/1.1.pug'), {
   breadcrumbsList: ['arcadia'],
   item: 'arcadia',
   branch: 'trunk',
+  lastCommit: {
+    hash: 'c4d248',
+    date: '20 Oct 2017, 12:24',
+    commiter: 'robot-srch-releaser' 
+  },
   viewSelectorList: [{ name: 'FILES', selected: true }, { name: 'BRANCHES', selected: false }],
   infoTableData: [
     { name: "api", type: "folder", commit: "d53dsv", message: "[vcs] move http to arc", commiter: "noxoomo", date: "4 s ago" },
@@ -41,6 +48,18 @@ app.get('/1440/1.1', (req, res) => res.render(resolve(UI_SRC_DIR, TEMPLATES_DIR,
     { name: "README.md", type: "file", commit: "h5jdsl", message: "[vcs] add readme", commiter: "pg", date: "Dec 29, 2017" },
     { name: "ya.make", type: "file", commit: "k5jdsv", message: "[vcs] move http to arc", commiter: "mvel", date: "Dec 29, 2017" }
   ]
+}));
+
+app.get('/1440/1.5', (req, res) => res.render(resolve(UI_SRC_DIR, TEMPLATES_DIR, './1440/1.5.pug'), {
+  breadcrumbsList: ['root', 'trunk', 'arcadia', 'addapter', 'ya.make'],
+  item: 'ya.make',
+  branch: 'trunk',
+  lastCommit: {
+    hash: 'r3248813',
+    date: '20 Oct 2017, 12:24',
+    commiter: 'robot-srch-releaser' 
+  },
+  viewSelectorList: [{ name: 'DETAILS', selected: true }, { name: 'HISTORY', selected: false }],
 }));
 
 app.listen(8000);

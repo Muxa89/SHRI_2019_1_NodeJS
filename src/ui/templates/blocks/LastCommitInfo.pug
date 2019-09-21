@@ -1,7 +1,7 @@
 .LastCommitInfo
   | Last commit 
-  span.Link c4d248 
+  span.Link= lastCommit.hash + ' '
   | on 
-  span.Link 20 Oct 2017, 12:24 
+  span.Link= lastCommit.date + ' '
   | by 
-  span.Commiter robot-srch-releaser
+  span.Commiter= lastCommit.commiter + ' '
