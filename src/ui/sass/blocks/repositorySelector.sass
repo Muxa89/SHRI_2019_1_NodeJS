@@ -2,26 +2,29 @@
   
 .RepositorySelector
   height: 100%
-  align-items: center
   line-height: 18px
   font:
     family: 'PT Sans'
     size: 16px
-
+  
   &-Text
-    height: 100%
-    display: flex
-    align-items: center
     box-sizing: border-box
     border-bottom: 
-      color: $selector-underline-red
       width: 3px
       style: solid
+      color: $selector-underline-red
+
+    &>*
+      display: inline-block
+      margin-top: 10px
 
   &-Repository
     font-weight: bold
 
   &-Name
     margin-left: 5px
+
+  &-Arrow
+    margin-top: -3px
 
 
