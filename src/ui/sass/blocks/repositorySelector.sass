@@ -1,0 +1,37 @@
+@import ../constants
+  
+.RepositorySelector
+  height: 100%
+  display: flex
+  align-items: center
+  line-height: 18px
+  cursor: pointer
+  font:
+    family: 'PT Sans'
+    size: 16px
+
+  &-Text
+    height: 100%
+    display: flex
+    align-items: center
+    box-sizing: border-box
+    border-bottom: 
+      color: $repository-selector-underline-red
+      width: 3px
+      style: solid
+
+  &-Repository
+    font-weight: bold
+
+  &-Name
+    margin-left: 5px
+
+  &-Arrow
+    height: 12px
+    width: 12px
+    margin-left: 6px
+    background: 
+      image: url(/img/arrow-down.svg)
+      repeat: no-repeat
+      position: center
+
