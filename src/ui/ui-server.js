@@ -1,13 +1,25 @@
 const express = require('express');
 const { resolve } = require('path');
+const sassMiddleware = require('node-sass-middleware');
 
 const UI_SRC_DIR = './src/ui';
 const TEMPLATES_DIR = 'templates';
-const CSS_DIR = 'css';
+const SASS_DIR = 'sass';
+const IMAGES_DIR = 'images';
+const CSS_DIR = 'dist/css';
 
 const app = express();
 
-app.use('/css', express.static(resolve(UI_SRC_DIR, CSS_DIR)));
+app.use(sassMiddleware({
+  src: resolve(UI_SRC_DIR, SASS_DIR),
+  dest: resolve(CSS_DIR),
+  outputStyle: 'compressed',
+  indentedSyntax: true,
+  prefix: '/css'
+}));
+
+app.use('/img', express.static(resolve(UI_SRC_DIR, IMAGES_DIR)));
+app.use('/css', express.static(resolve(CSS_DIR)));
 
 app.set('view engine', 'pug');
 app.get('/1440/1.1', (req, res) => res.render(resolve(UI_SRC_DIR, TEMPLATES_DIR, './1440/1.1.pug'), {
