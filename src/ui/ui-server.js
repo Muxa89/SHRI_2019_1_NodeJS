@@ -1,12 +1,16 @@
 const express = require('express');
 const { resolve } = require('path');
 
+const UI_SRC_DIR = './src/ui';
+const TEMPLATES_DIR = 'templates';
+const CSS_DIR = 'css';
+
 const app = express();
+
+app.use('/css', express.static(resolve(UI_SRC_DIR, CSS_DIR)));
+
 app.set('view engine', 'pug');
-
-const TEMPLATE_DIR = './src/ui/templates';
-
-app.get('/1440/1.1', (req, res) => res.render(resolve(TEMPLATE_DIR, './1440/1.1.pug'), {
+app.get('/1440/1.1', (req, res) => res.render(resolve(UI_SRC_DIR, TEMPLATES_DIR, './1440/1.1.pug'), {
   breadcrumbsList: ['arcadia'],
   item: 'arcadia',
   branch: 'trunk',
