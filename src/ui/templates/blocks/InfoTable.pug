@@ -1,0 +1,18 @@
+div(class='InfoTable')
+  table
+    thead
+      tr
+        th Name
+        th Last commit
+        th Commit message
+        th Commiter
+        th Updated
+    tbody
+      -for (let i = 0; i < infoTableData.length; i++)
+        tr
+          td= infoTableData[i].name
+          td= infoTableData[i].commit
+          td= infoTableData[i].message
+          td= infoTableData[i].commiter
+          td= infoTableData[i].date
+

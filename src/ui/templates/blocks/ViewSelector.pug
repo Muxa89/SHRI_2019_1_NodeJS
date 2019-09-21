@@ -1,0 +1,4 @@
+-const ViewSelector = 'ViewSelector'
+div(class=ViewSelector)
+  -for (let i = 0; i < viewSelectorList.length; i++)
+    div(class=`${ViewSelector}-Item`)= viewSelectorList[i].name
