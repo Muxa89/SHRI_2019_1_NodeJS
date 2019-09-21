@@ -1,0 +1,52 @@
+.InfoTable
+  display: grid
+  grid-template-columns: 15em 16em 30em 14em 11em
+  justify-content: left
+
+  &-Header
+    padding-top: 14px
+    padding-bottom: 9px
+    border-top: 1px solid #E5E5E5
+    border-bottom: 1px solid #E5E5E5
+    color: #B8BEC3
+
+    &_align_left
+      text-align: left
+    
+    &_align_right
+      text-align: right
+
+  &-Row
+    padding-top: 13px
+    padding-bottom: 14px
+    border-bottom: 1px solid #F2F2F2
+
+    &_align_left
+      text-align: left
+    
+    &_align_right
+      text-align: right
+
+  &-TextWrapper
+    font:
+      family: 'PT Sans'
+      size: 14px
+    line-height: 21px
+    margin-left: 9px
+    display: inline-block
+
+  &-EntryType
+    display: inline-block
+    height: 19px
+    width: 12px
+    margin-left: 8px
+    vertical-align: middle
+    background:
+      position: center
+      repeat: no-repeat
+
+    &_type_folder
+      background-image: url(/img/folder-icon.svg)
+
+    &_type_file
+      background-image: url(/img/file-icon.svg)
