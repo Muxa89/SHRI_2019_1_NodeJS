@@ -1,16 +1,42 @@
 .CommitTitleContainer
   display: flex
+  @if $screen-width == 1440px
+    flex-wrap: nowrap
+  @else if $screen-width == 360px
+    flex-wrap: wrap
+
   font:
     family: 'PT Sans'
   align-items: center
-  margin-top: 15px
+  margin-top: 8px
+
+  &-BackButton
+    @if $screen-width == 1440px
+      display: none
+    color: #7F8285
+    line-height: 15px
+    font:
+      family: 'PT Sans'
+      size: 13px
+    flex-grow: 1
+    padding-left: 16px
+    background: 
+      image: url(/img/arrow-left.svg)
+      position-x: left
+      position-y: center
+      repeat: no-repeat
 
   &-Title
     line-height: 28px
-    font:
-      size: 24px
-      weight: bold
+    font-weight: bold
     flex-grow: 1
+
+    @if $screen-width == 1440px
+      font-size: 24px
+    @else if $screen-width == 360px
+      font-size: 20px
+      margin-top: 10px
+      order: 2
 
   &-Files
     line-height: 15px
@@ -18,9 +44,13 @@
       size: 13px
     box-sizing: border-box
     cursor: pointer
-    padding: 4px 8px
     background-color: #E6E6E6
     border-radius: 4px
+    @if $screen-width == 1440px
+      padding: 4px 8px
+    @else if $screen-width == 360px
+      padding: 4px 12px
+      order: 1
   
   &-FilesIcon
     display: inline-block

@@ -1,8 +1,8 @@
 module.exports = {
-  commitTitle: 'DEVTOOLS-4599: Add option to add extra whitespace between projects',
-  hash: 's324e8',
-  commiter: 'woodcutter',
-  time: '4 s ago',
+  commitTitle: 'DEVTOOLS-4599: Add option to add extra whitespace between projects projects',
+  hash: 'c4d248',
+  commiter: 'robot-srch-releaser',
+  time: '20 Oct 2017, 12:24',
   revision: 'r4318347',
   state: 'modified',
   path: '/trunk/arcadia/devtools/intellij/src/main/java/ru/yandex/devtools/intellij/arc/client/ArcCli.java',

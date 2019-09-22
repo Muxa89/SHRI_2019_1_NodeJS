@@ -5,7 +5,7 @@
         | M
     .CommitPreview-FileIcon
     .CommitPreview-Path= path
-    .CommitPreview-Added= linesAdded
+    .CommitPreview-Added= `+${linesAdded}`
     .CommitPreview-Removed= `-${linesRemoved}`
     .CommitPreview-ExtractButton
   include ./CommitPreviewNavigation
