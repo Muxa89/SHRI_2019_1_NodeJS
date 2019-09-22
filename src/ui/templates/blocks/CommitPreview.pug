@@ -1,0 +1,13 @@
+.CommitPreview
+  .CommitPreview-Header
+    .CommitPreview-State
+      if state === 'modified'
+        | M
+    .CommitPreview-FileIcon
+    .CommitPreview-Path= path
+    .CommitPreview-Added= linesAdded
+    .CommitPreview-Removed= `-${linesRemoved}`
+    .CommitPreview-ExtractButton
+  include ./CommitPreviewNavigation
+  include ./CommitPreviewSource
+  include ./CommitPreviewNavigation
