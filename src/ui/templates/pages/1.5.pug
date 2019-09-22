@@ -1,7 +1,10 @@
 extends ../main.pug
 
 append head
-  title 1.1
+  title 1.5
+  link(rel='stylesheet', href='/lib/prism/prism.css')
+  script(src='/lib/prism/prism.js') 
+  block adaptive
 
 append main 
   include ../blocks/Breadcrumbs
@@ -9,4 +12,4 @@ append main
   include ../blocks/ItemAndBranchContainer
   include ../blocks/LastCommitInfo
   include ../blocks/ViewSelector
-  include ../blocks/InfoTable
+  include ../blocks/DetailPanel
