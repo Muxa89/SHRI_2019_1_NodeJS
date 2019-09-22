@@ -2,8 +2,13 @@
   width: 100%
   padding: 
     top: 9px
-    bottom: 12px
+    @if $screen-width == 1440px
+      bottom: 12px
+    @else if $screen-width == 360px
+      bottom: 9px
   display: flex
+  @if $screen-width == 360px
+    flex-wrap: wrap
 
   font:
     family: 'PT Sans'
@@ -12,6 +17,8 @@
   &-Item
     cursor: pointer
     line-height: 20px
+    @if $screen-width == 360px
+      margin-bottom: 5px
 
   &-Item:not(:last-child)
     color: #7F8285;

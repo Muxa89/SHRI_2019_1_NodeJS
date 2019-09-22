@@ -1,9 +1,9 @@
 module.exports = {
-  breadcrumbsList: ['root', 'trunk', 'arcadia', 'addapter', 'ya.make'],
-  item: 'ya.make',
+  breadcrumbsList: ['arcadia', 'trunk', 'arcadia', 'arcanum', 'ya.make'],
+  item: 'arcanum',
   branch: 'trunk',
   lastCommit: {
-    hash: 'r3248813',
+    hash: 'c4d248',
     date: '20 Oct 2017, 12:24',
     commiter: 'robot-srch-releaser'
   },

@@ -1,8 +1,13 @@
 .DetailPanel
-  width: 100%
   font-family: 'PT Sans'
   margin-top: 16px
   display: inline-block
+
+  @if $screen-width == 1440px
+    width: 100%
+  @else if $screen-width == 360px
+    width: calc(100% + 32px)
+    margin-left: -16px
 
   &-Header
     display: flex
@@ -43,6 +48,9 @@
     flex-grow: 1
       
   &-DownloadButton
+    @if $screen-width == 360px
+      display: none
+
     height: 28px
     width: 38px
     box-sizing: border-box
@@ -59,14 +67,20 @@
 
   &-Preview
     line-height: 20px
-    padding-top: 3px
 
     pre
       padding:
-        left: 43px
-        top: 0px
+        @if $screen-width == 1440px
+          top: 3px !important
+        @else if $screen-width == 360px
+          top: 5px !important
+          left: 14px !important
       margin-top: 0px
       
+@if $screen-width == 360px
+  .line-numbers-rows > span:before 
+    padding-right: 0px !important
+    margin-right: -10px
 
 
 
