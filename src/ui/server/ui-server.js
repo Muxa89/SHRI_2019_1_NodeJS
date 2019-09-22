@@ -28,5 +28,6 @@ app.set('view engine', 'pug');
 app.get('/1440/1.1', (req, res) => res.render(resolve(UI_SRC_DIR, TEMPLATES_DIR, './1440/1.1.pug'), require('./data/1440/1.1.js')));
 app.get('/1440/1.5', (req, res) => res.render(resolve(UI_SRC_DIR, TEMPLATES_DIR, './1440/1.5.pug'), require('./data/1440/1.5.js')));
 app.get('/1440/1.6', (req, res) => res.render(resolve(UI_SRC_DIR, TEMPLATES_DIR, './1440/1.6.pug'), require('./data/1440/1.6.js')));
+app.get('/1440/2.1', (req, res) => res.render(resolve(UI_SRC_DIR, TEMPLATES_DIR, './1440/2.1.pug'), require('./data/1440/2.1.js')));
 
 app.listen(8000);

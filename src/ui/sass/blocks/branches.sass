@@ -1,0 +1,56 @@
+.Branches
+  width: 100%
+  display: grid
+  grid-template-columns: 1fr 1fr
+  font: 
+    family: 'PT Sans'
+    size: 14px
+
+  &-Header
+    color: #B8BEC3
+    line-height: 20px
+    width: 100%
+    padding:
+      top: 14px
+      bottom: 9px
+      right: 8px
+    border-top: 1px solid #E5E5E5
+    border-bottom: 1px solid #E5E5E5
+    box-sizing: border-box
+    &_align_left
+      text-align: left
+    &_align_right
+      text-align: right
+
+  &-Icon
+    cursor: pointer
+    display: inline-block
+    height: 20px
+    width: 17px
+    vertical-align: middle
+    background: 
+      position-x: left
+      position-y: center
+      image: url(/img/branch.svg)
+      repeat: no-repeat
+
+  &-NameText
+    cursor: pointer
+    line-height: 20px
+    display: inline-block
+    vertical-align: middle
+    font: 
+      weight: bold
+
+
+  &-Hash
+    text-align: right
+    padding-right: 8px
+
+  &-Row
+    box-sizing: border-box
+    border-bottom: 1px solid #F2F2F2
+    width: 100%
+    padding:
+      top: 15px
+      bottom: 13px
