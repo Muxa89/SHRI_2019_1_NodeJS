@@ -1,54 +1,117 @@
 .InfoTable
-  display: grid
-  grid-template-columns: 15em 16em 30em 14em 11em
-  justify-content: left
+  font:
+    family: 'PT Sans'
+    size: 14px
+  line-height: 21px
+  @if $screen-width == 360px
+    margin-top: -1px
 
   &-Header
-    padding-top: 14px
-    padding-bottom: 9px
-    border-top: 1px solid #E5E5E5
-    border-bottom: 1px solid #E5E5E5
+    @if $screen-width == 1440px
+      display: flex
+    @else if $screen-width == 360px
+      display: none
+
+    padding:
+      top: 14px
+      bottom: 9px
+    border:
+      top: 1px solid #E5E5E5
+      bottom: 1px solid #E5E5E5
     color: #B8BEC3
 
-    &_align_left
-      text-align: left
-    
-    &_align_right
-      text-align: right
-
   &-Row
-    padding-top: 13px
-    padding-bottom: 14px
-    border-bottom: 1px solid #F2F2F2
+    box-sizing: border-box
+    @if $screen-width == 1440px
+      display: flex
+      flex-wrap: nowrap
 
-    &_align_left
-      text-align: left
-    
-    &_align_right
-      text-align: right
+      padding:
+        top: 13px
+        bottom: 14px
 
-  &-TextWrapper
-    font:
-      family: 'PT Sans'
-      size: 14px
-    line-height: 21px
-    margin:
-      right: 9px
-      left: 9px
-    display: inline-block
+      border-bottom: 1px solid #F2F2F2
+    @else if $screen-width == 360px
+      display: flex
+      flex-wrap: wrap
 
-  &-EntryType
+      padding:
+        top: 9px
+        bottom: 13px
+        right: 16px
+
+      border-bottom: 1px solid #E5E5E5
+      &:first-child
+        top: 1px solid #E5E5E5
+
+      background: 
+        image: url(/img/arrow-right.svg)
+        repeat: no-repeat
+        position-x: calc(100% - 3px)
+        position-y: center
+
+  &-EntryIcon
     display: inline-block
     height: 19px
     width: 12px
-    margin-left: 8px
     vertical-align: middle
     background:
       position: center
       repeat: no-repeat
+    margin-right: 9px
+    cursor: pointer
 
     &_type_folder
       background-image: url(/img/folder-icon.svg)
 
     &_type_file
       background-image: url(/img/file-icon.svg)
+
+  &-Name
+    @if $screen-width == 1440px
+      width: 242px
+      margin-left: 8px
+
+      &>.InfoTable-Text
+        cursor: pointer
+    @else if $screen-width == 360px
+      width: 100%
+      order: 0
+
+  &-Commit
+    @if $screen-width == 1440px
+      width: 258px
+    @else if $screen-width == 360px
+      margin-top: 8px
+      order: 2
+
+  &-Message
+    @if $screen-width == 1440px
+      flex-grow: 1
+    @else if $screen-width == 360px
+      margin-top: 10px
+      width: 100%
+      order: 1
+
+  &-Commiter
+    @if $screen-width == 1440px
+      width: 233px
+    @else if $screen-width == 360px
+      margin:
+        top: 8px
+        left: 5px
+      order: 3
+
+  &-Date
+    @if $screen-width == 1440px
+      margin-right: 8px
+      text-align: right
+      width: 150px
+    @else if $screen-width == 360px
+      margin:
+        top: 8px
+        left: 5px
+      order: 4
+
+  &-Text
+    display: inline-block

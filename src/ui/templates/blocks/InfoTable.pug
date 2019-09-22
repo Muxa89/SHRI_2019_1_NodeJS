@@ -1,26 +1,20 @@
 .InfoTable
-  .InfoTable-Header.InfoTable-Header_align_left
-    span.InfoTable-TextWrapper Name
-  .InfoTable-Header.InfoTable-Header_align_left
-    span.InfoTable-TextWrapper Last commit
-  .InfoTable-Header.InfoTable-Header_align_left
-    span.InfoTable-TextWrapper Commit message
-  .InfoTable-Header.InfoTable-Header_align_left 
-    span.InfoTable-TextWrapper Commiter
-  .InfoTable-Header.InfoTable-Header_align_right
-    span.InfoTable-TextWrapper Updated
+  .InfoTable-Header
+    .InfoTable-Name Name
+    .InfoTable-Commit Last commit
+    .InfoTable-Message Commit message
+    .InfoTable-Commiter Commiter
+    .InfoTable-Date Updated
   -for (let i = 0; i < infoTableData.length; i++)
-    .InfoTable-Row.InfoTable-Row_align_left.InfoTable-Name
-      if infoTableData[i].type === 'folder'
-        .InfoTable-EntryType.InfoTable-EntryType_type_folder
-      else
-        .InfoTable-EntryType.InfoTable-EntryType_type_file
-      span.InfoTable-TextWrapper= infoTableData[i].name
-    .InfoTable-Row.InfoTable-Row_align_left.InfoTable-Commit
-      span.InfoTable-TextWrapper.Link= infoTableData[i].commit
-    .InfoTable-Row.InfoTable-Row_align_left.InfoTable-Message
-      span.InfoTable-TextWrapper= infoTableData[i].message
-    .InfoTable-Row.InfoTable-Row_align_left.InfoTable-Commiter
-      span.InfoTable-TextWrapper.Commiter= infoTableData[i].commiter
-    .InfoTable-Row.InfoTable-Row_align_right.InfoTable-Date
-      span.InfoTable-TextWrapper= infoTableData[i].date
+    .InfoTable-Row
+      .InfoTable-Name
+        if infoTableData[i].type === 'folder'
+          .InfoTable-EntryIcon.InfoTable-EntryIcon_type_folder
+        else
+          .InfoTable-EntryIcon.InfoTable-EntryIcon_type_file
+        .InfoTable-Text= infoTableData[i].name
+      .InfoTable-Commit
+        .InfoTable-Text.Link= infoTableData[i].commit
+      .InfoTable-Message= infoTableData[i].message
+      .InfoTable-Commiter.Commiter= infoTableData[i].commiter
+      .InfoTable-Date= infoTableData[i].date

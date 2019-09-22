@@ -2,8 +2,12 @@
   width: 100%
   display: flex
   padding:
-    top: 12px
-    bottom: 8px
+    @if $screen-width == 1440px
+      top: 12px
+      bottom: 8px
+    @else if $screen-width == 360px
+      top: 7px
+      bottom: 4px
 
   &-SelectedItem
     margin-right: 12px
@@ -12,9 +16,11 @@
   line-height: 28px
   font:
     family: 'PT Sans'
-    size: 24px
     weight: bold
-  
+    @if $screen-width == 1440px
+      size: 24px
+    @else if $screen-width == 360px
+      size: 20px
 
 .BranchSelector
   line-height: 28px

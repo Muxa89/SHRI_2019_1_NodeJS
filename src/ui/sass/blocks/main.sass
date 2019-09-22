@@ -1,3 +1,7 @@
 .Main
-  padding-left: 32px
-  padding-right: 32px
+  @if $screen-width == 1440px
+    padding-left: 32px
+    padding-right: 32px
+  @else if $screen-width == 360px 
+    padding-left: 16px
+    padding-right: 16px

@@ -13,18 +13,26 @@
       width: 3px
       style: solid
       color: $selector-underline-red
-
-    &>*
-      display: inline-block
-      margin-top: 10px
+    display: flex
+    align-items: center
+    @if $screen-width == 1440px
+      margin-top: -5px
+    @else if $screen-width == 360px
+      margin-top: 6px
 
   &-Repository
     font-weight: bold
 
   &-Name
-    margin-left: 5px
+    @if $screen-width == 1440px
+      margin-left: 5px
+    @else if $screen-width == 360px
+      margin-left: 3px
 
   &-Arrow
-    margin-top: -3px
+    @if $screen-width == 1440px
+      margin-top: -3px
+    @else if $screen-width == 360px
+      margin-top: 3px
 
 
