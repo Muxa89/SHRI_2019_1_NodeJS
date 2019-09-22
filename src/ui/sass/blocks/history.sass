@@ -9,12 +9,18 @@
       size: 16px
     line-height: 20px
     color: #7F8285
-    margin-top: 17px
+    @if $screen-width == 1440px
+      margin-top: 17px
+    @else if $screen-width == 360px
+      margin-top: 11px
     margin-bottom: 16px
 
   &-CommitContainer
     display: grid
-    grid-template-columns: 40px auto 497px 19px
+    @if $screen-width == 1440px
+      grid-template-columns: 40px auto 497px 19px
+    @else if $screen-width == 360px
+      grid-template-columns: 40px auto 19px
     justify-items: stretch
     align-items: start
     grid-row-gap: 15px
@@ -30,6 +36,9 @@
 
   &-Description
     padding-left: 12px
+
+    &>.History-Hash
+      display: inline-block
 
   &-Title
     width: 100%
@@ -47,7 +56,10 @@
     margin-bottom: 3px
 
   &-Hash
-    display: inline-block
+    @if $screen-width == 1440px 
+      display: inline-block
+    @else if $screen-width == 360px
+      display: none
     font:
       size: 13px
     line-height: 18px
