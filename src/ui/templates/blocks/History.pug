@@ -1,0 +1,20 @@
+.History
+  -for (let i = 0; i < history.length; i++)
+    .History-Day
+      .History-Date= history[i].date
+      .History-CommitContainer
+        -for (let j = 0; j < history[i].commits.length; j++)
+          .History-Icon
+          .History-Description
+            .History-Title= history[i].commits[j].title
+            .History-Comment= history[i].commits[j].comment
+            .History-Hash
+              span.Link= history[i].commits[j].hash
+            .History-Commiter by 
+              span.Commiter= history[i].commits[j].commiter
+            .History-Time= history[i].commits[j].time
+          .History-Hash
+            span.Link= history[i].commits[j].hash
+          .History-LinkCol
+            span.History-Link
+            
