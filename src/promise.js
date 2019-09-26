@@ -1,66 +1,78 @@
 (function () {
+  const executeSafely = function (fn, arg, onSuccess, onError) {
+    try {
+      onSuccess(fn(arg));
+    } catch (err) {
+      onError(err);
+    }
+  }
+
   function MyPromise(executor) {
-    this.onFulfill = undefined;
-    this.onReject = undefined;
+    this._executor = executor;
 
-    var thisPromise = this;
+    this._listeners = [];
 
-    this.resolve = function (value) {
-      if (this.onFulfill !== undefined) {
-        this.onFulfill(value);
-      }
-    }
+    this._resolve = function (value) {
+      this._listeners.forEach(function (listener) {
+        try {
+          listener.resolve(value);
+        } catch (err) {
+          listener.reject(err);
+        }
+      }.bind(this));
+    }.bind(this);
 
-    this.reject = function (error) {
-      if (this.onReject !== undefined) {
-        this.onReject(error);
-      }
-    }
+    this._reject = function (err) {
+      this._listeners.forEach(function (listener) {
+        try {
+          listener.reject(err);
+        } catch (errInListener) {
+          listener.reject(errInListener);
+        }
+      }.bind(this));
+    }.bind(this);
 
-    setTimeout(function () {
+    this._execution = function () {
       try {
-        if (executor) {
-          executor.bind(thisPromise)(thisPromise.resolve.bind(thisPromise), thisPromise.reject.bind(thisPromise));
+        if (this._executor) {
+          this._executor(this._resolve, this._reject);
+        } else {
+          throw new Error('No executor function provided.');
         }
       } catch (err) {
-        thisPromise.reject(err);
+        this._reject(err);
       }
-    }, 0)
+    }.bind(this);
 
+    this.then = function (onFulfilled, onRejected) {
+      const res = new MyPromise(function () { });
 
-    this.then = function (successFn, failureFn) {
-      var res = new MyPromise();
-
-      this.onFulfill = function (value) {
-        var successRes = successFn(value);
-        if (successRes && successRes.then && typeof successRes.then === 'function') {
-          successRes.then(function (succValue) {
-            try {
-              res.resolve(succValue);
-            } catch (err) {
-              res.reject(err);
-            }
-          });
-        } else {
-          res.resolve(successRes);
+      this._listeners.push({
+        resolve: function (value) {
+          if (value && value.then && typeof (value.then) === 'function') {
+            value.then(function (thenValue) {
+              executeSafely(onFulfilled, thenValue, res._resolve, res._reject);
+            });
+          } else {
+            res._resolve(onFulfilled ? onFulfilled(value) : value);
+          }
+        },
+        reject: function (err) {
+          if (onRejected) {
+            executeSafely(onRejected, err, res._resolve, res._reject);
+          } else {
+            res._reject(err);
+          }
         }
-      };
-
-      this.onReject = function (err) {
-        if (failureFn) {
-          var failureRes = failureFn(err);
-          res.resolve(failureRes);
-        } else {
-          res.reject(err);
-        }
-      };
-
+      });
       return res;
-    };
+    }.bind(this);
 
-    this.catch = function (failure) {
-      return this.then(undefined, failure);
-    }
+    this.catch = function (catchOnReject) {
+      return this.then(undefined, catchOnReject);
+    }.bind(this);
+
+    setTimeout(this._execution, 0);
   }
 
   var globalObject;
