@@ -12,6 +12,12 @@
       "args": [
         "C:\\Muxa\\Helper"
       ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Launch UI",
+      "program": "${workspaceFolder}\\src\\ui\\ui-server.js",
     }
   ]
 }

@@ -1,0 +1,29 @@
+@import ../constants
+
+.ViewSelector
+  line-height: 20px
+  display: flex
+  height: 41px
+  padding-top: 9px
+  font:
+    family: 'PT Sans'
+    size: 16px
+    weight: bold
+
+  &-Item
+    cursor: pointer
+    height: 100%
+    box-sizing: border-box
+    display: flex
+    align-items: center
+    margin-right: 36px
+    border-bottom: 
+      width: 3px
+      style: solid
+
+    &:not(&_selected)
+      border-bottom-color: transparent
+
+    &_selected
+      border-bottom-color: $selector-underline-red
+

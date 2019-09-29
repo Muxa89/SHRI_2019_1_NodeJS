@@ -1,0 +1,13 @@
+extends ../main.pug
+
+append head
+  title 1.6
+  block adaptive
+
+append main 
+  include ../blocks/Breadcrumbs
+  include ../blocks/Separator
+  include ../blocks/ItemAndBranchContainer
+  include ../blocks/LastCommitInfo
+  include ../blocks/ViewSelector
+  include ../blocks/History

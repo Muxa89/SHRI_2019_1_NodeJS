@@ -1,0 +1,20 @@
+.InfoTable
+  .InfoTable-Header
+    .InfoTable-Name Name
+    .InfoTable-Commit Last commit
+    .InfoTable-Message Commit message
+    .InfoTable-Commiter Commiter
+    .InfoTable-Date Updated
+  -for (let i = 0; i < infoTableData.length; i++)
+    .InfoTable-Row
+      .InfoTable-Name
+        if infoTableData[i].type === 'folder'
+          .InfoTable-EntryIcon.InfoTable-EntryIcon_type_folder
+        else
+          .InfoTable-EntryIcon.InfoTable-EntryIcon_type_file
+        .InfoTable-Text= infoTableData[i].name
+      .InfoTable-Commit
+        .InfoTable-Text.Link= infoTableData[i].commit
+      .InfoTable-Message= infoTableData[i].message
+      .InfoTable-Commiter.Commiter= infoTableData[i].commiter
+      .InfoTable-Date= infoTableData[i].date

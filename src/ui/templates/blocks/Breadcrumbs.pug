@@ -1,0 +1,5 @@
+.Breadcrumbs
+  -for (let i = 0; i < breadcrumbsList.length; i++)
+    .Breadcrumbs-Item= breadcrumbsList[i]
+    if i < breadcrumbsList.length - 1
+      .Breadcrumbs-Delimeter /

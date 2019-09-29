@@ -1,0 +1,73 @@
+.Branches
+  width: 100%
+  font: 
+    family: 'PT Sans'
+    size: 14px
+
+  &-Header
+    @if $screen-width == 1440px
+      display: flex
+    @else if $screen-width == 360px
+      display: none
+    color: #B8BEC3
+    line-height: 20px
+    width: 100%
+    padding:
+      top: 14px
+      bottom: 9px
+    border-top: 1px solid #E5E5E5
+    border-bottom: 1px solid #E5E5E5
+    box-sizing: border-box
+
+  &-Row
+    display: flex
+    box-sizing: border-box
+    width: 100%
+    @if $screen-width == 1440px
+      flex-wrap: nowrap
+      border-bottom: 1px solid #F2F2F2
+      padding:
+        top: 15px
+        bottom: 13px
+    @else if $screen-width == 360px
+      flex-wrap: wrap
+      border-bottom: 1px solid #E5E5E5
+      padding:
+        top: 11px
+        bottom: 15px
+
+      background: 
+        image: url(/img/arrow-right.svg)
+        repeat: no-repeat
+        position-x: calc(100% - 3px)
+        position-y: center
+
+      &:first-child
+        border-top: 1px solid #E5E5E5
+
+  &-Name
+    @if $screen-width == 1440px
+      width: 50%
+    @else if $screen-width == 360px
+      width: 100%
+      margin-bottom: 8px
+
+  &-Icon
+    cursor: pointer
+    display: inline-block
+    height: 19px
+    width: 17px
+    vertical-align: middle
+    margin:
+      left: -1px
+      right: 4px
+    background: 
+      position-x: left
+      position-y: calc(50% - 1px)
+      image: url(/img/branch.svg)
+      repeat: no-repeat
+
+  &-Hash
+    width: 50%
+    text-align: right
+    margin-right: 10px

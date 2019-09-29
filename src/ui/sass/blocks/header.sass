@@ -1,0 +1,17 @@
+.Header 
+  display: flex
+  box-sizing: border-box
+  width: 100%
+
+  @if $screen-width == 1440px
+    height: 48px
+    padding-left: 32px
+  @else if $screen-width == 360px
+    height: 59px
+    padding-left: 16px
+
+  &-Logo
+    @if $screen-width == 1440px
+      margin-right: 40px
+    @else if $screen-width == 360px
+      margin-right: 26px

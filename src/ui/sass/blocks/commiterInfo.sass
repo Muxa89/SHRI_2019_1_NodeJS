@@ -1,0 +1,30 @@
+.CommiterInfo
+  display: flex
+  flex-wrap: wrap
+  font: 
+    family: 'PT Sans'
+    size: 16px
+  line-height: 20px
+
+  @if $screen-width == 1440px
+    margin-top: 4px
+  @else if $screen-width == 360px
+    margin-top: 7px
+
+  &>* 
+    margin-right: 5px
+
+  @if $screen-width == 1440px
+    &-On
+      display: none
+  @else if $screen-width == 360px
+    &-Hash
+      order: 0
+    &-On
+      order: 1
+    &-Time
+      order: 2
+    &-By
+      order: 3
+    &-Commiter
+      order: 4

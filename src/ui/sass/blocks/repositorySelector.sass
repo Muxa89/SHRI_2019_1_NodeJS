@@ -1,0 +1,38 @@
+@import ../constants
+  
+.RepositorySelector
+  height: 100%
+  line-height: 18px
+  font:
+    family: 'PT Sans'
+    size: 16px
+  
+  &-Text
+    box-sizing: border-box
+    border-bottom: 
+      width: 3px
+      style: solid
+      color: $selector-underline-red
+    display: flex
+    align-items: center
+    @if $screen-width == 1440px
+      margin-top: -5px
+    @else if $screen-width == 360px
+      margin-top: 6px
+
+  &-Repository
+    font-weight: bold
+
+  &-Name
+    @if $screen-width == 1440px
+      margin-left: 5px
+    @else if $screen-width == 360px
+      margin-left: 3px
+
+  &-Arrow
+    @if $screen-width == 1440px
+      margin-top: -3px
+    @else if $screen-width == 360px
+      margin-top: 3px
+
+

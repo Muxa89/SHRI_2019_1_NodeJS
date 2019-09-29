@@ -1,0 +1,13 @@
+html 
+  head
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=PT+Sans&display=swap')
+    link(rel='stylesheet', href='https://fonts.googleapis.com/css?family=PT+Mono&display=swap')
+    block head
+  body
+    include ./blocks/Header
+    include ./blocks/Separator
+
+    .Main
+      block main
+
+    include ./blocks/Footer

@@ -1,0 +1,86 @@
+.DetailPanel
+  font-family: 'PT Sans'
+  margin-top: 16px
+  display: inline-block
+
+  @if $screen-width == 1440px
+    width: 100%
+  @else if $screen-width == 360px
+    width: calc(100% + 32px)
+    margin-left: -16px
+
+  &-Header
+    display: flex
+    height: 42px
+    box-sizing: border-box
+    border: 1px solid #E5E5E5
+    padding:
+      top: 10px
+      left: 14px
+      right: 15px
+    border-radius: 3px 3px 0 0
+    position: relative
+
+  &-FileIcon
+    display: inline-block
+    height: 19px
+    width: 12px
+    background:
+      position: center
+      repeat: no-repeat
+      image: url(/img/file-icon.svg)
+
+  &-FileName
+    display: inline-block
+    line-height: 20px
+    margin-left: 10px
+    font:
+      size: 14px
+      weight: bold
+
+  &-FileSize
+    display: inline-block
+    line-height: 20px
+    margin-left: 8px
+    font: 
+      size: 13px
+    color: #999999
+    flex-grow: 1
+      
+  &-DownloadButton
+    @if $screen-width == 360px
+      display: none
+
+    height: 28px
+    width: 38px
+    box-sizing: border-box
+    background: 
+      position: center
+      repeat: no-repeat
+      image: url(/img/download.svg)
+      color: #F5F5F5
+    border-radius: 3px
+    border: 1px solid #CCCCCC
+    position: relative
+    top: -3px
+    cursor: pointer
+
+  &-Preview
+    line-height: 20px
+
+    pre
+      padding:
+        @if $screen-width == 1440px
+          top: 3px !important
+        @else if $screen-width == 360px
+          top: 5px !important
+          left: 14px !important
+      margin-top: 0px
+      
+@if $screen-width == 360px
+  .line-numbers-rows > span:before 
+    padding-right: 0px !important
+    margin-right: -10px
+
+
+
