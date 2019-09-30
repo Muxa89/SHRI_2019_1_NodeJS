@@ -4,6 +4,7 @@ append head
   title My Redux
   script(src='/js/my-redux.js')
   script(src='/lodash/lodash.min.js')
+  script(src='/axios/axios.min.js')
   link(rel='stylesheet', href='/css/main_1440.css')
 
 append main 
@@ -18,4 +19,6 @@ append main
   .InfoTable(id='info-table')
 
 append body_end
+  script.
+    window.repositoryId = "#{repositoryId}";
   script(src='/js/main.js')

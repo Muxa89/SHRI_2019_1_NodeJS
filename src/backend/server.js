@@ -2,6 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const { execFile } = require('child_process');
 const rimraf = require('rimraf');
+const cors = require('cors');
 
 const async = require('async');
 
@@ -214,6 +215,7 @@ function treeHandler(root) {
 function startServer(root) {
   const app = express();
   app.use(express.json());
+  app.use(cors());
 
   app.get('/api/repos', (req, res) => {
     getAllRepositories(root, repos => {

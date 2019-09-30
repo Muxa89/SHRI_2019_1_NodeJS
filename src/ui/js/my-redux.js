@@ -10,6 +10,9 @@
       this._state = undefined;
       this._listeners = {};
       this._listenerCounter = 0;
+      this.dispatch = this.dispatch.bind(this);
+      this.subscribe = this.subscribe.bind(this);
+      this.getState = this.getState.bind(this);
       this.dispatch(initAction());
     }
 
@@ -56,9 +59,31 @@
     }
   }
 
+  const thunk = store => next => action => {
+    if (typeof action === 'function') {
+      return action(store.dispatch, store.getState);
+    }
+
+    return next(action);
+  };
+
+  const applyMiddleware = (store, middlewares) => {
+    middlewares = middlewares.slice();
+    middlewares.reverse();
+    let dispatch = store.dispatch;
+    middlewares.forEach(middleware => (dispatch = middleware(store)(dispatch)));
+    return Object.assign({}, store, { dispatch });
+  };
+
+  const createStore = (reducer, middlewares) => {
+    return applyMiddleware(new Store(reducer), middlewares);
+  };
+
   window.MyRedux = {
     Store,
     View,
-    INIT
+    INIT,
+    thunk,
+    createStore
   };
 })();
