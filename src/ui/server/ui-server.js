@@ -8,6 +8,7 @@ const SASS_DIR = 'sass';
 const IMAGES_DIR = 'images';
 const CSS_DIR = 'dist/css';
 const LIB_DIR = 'lib';
+const JS_DIR = 'js';
 
 const app = express();
 
@@ -24,6 +25,8 @@ app.use(
 app.use('/img', express.static(resolve(UI_SRC_DIR, IMAGES_DIR)));
 app.use('/css', express.static(resolve(CSS_DIR)));
 app.use('/lib', express.static(resolve(LIB_DIR)));
+app.use('/js', express.static(resolve(UI_SRC_DIR, JS_DIR)));
+app.use('/lodash', express.static(resolve('node_modules/lodash')));
 
 app.set('view engine', 'pug');
 
@@ -50,6 +53,13 @@ const pages = [
 ];
 
 pages.forEach(servePage);
+
+app.get('/my-redux', (req, res) =>
+  res.render(
+    resolve(UI_SRC_DIR, TEMPLATES_DIR, 'my-redux.pug'),
+    require(`./data/1440/1.1.js`)
+  )
+);
 
 const port = 8000;
 app.listen(port);
