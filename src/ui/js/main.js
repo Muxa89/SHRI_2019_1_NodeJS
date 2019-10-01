@@ -107,8 +107,18 @@ class InputView extends View {
     return `
       <div class="InfoTable-Row">
         <div class="InfoTable-Name">
-          <div class="InfoTable-EntryIcon InfoTable-EntryIcon_type_${row.type}"></div>
-          <div class="InfoTable-Text">${row.name}</div>
+          <div class="InfoTable-EntryIcon InfoTable-EntryIcon_type_${
+            row.type
+          }"></div>
+          <div class="InfoTable-Text">
+            ${
+              window.repositoryId === ''
+                ? `<a href="/my-redux/${row.name}">`
+                : ''
+            }
+            ${row.name}
+            ${window.repositoryId === '' ? '</a>' : ''}
+          </div>
         </div>
         <div class="InfoTable-Commit">
           <div class="InfoTable-Text Link">${row.commit}</div>
