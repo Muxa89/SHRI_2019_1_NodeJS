@@ -1,0 +1,24 @@
+extends main.pug
+
+append head
+  title My Redux
+  script(src='/js/my-redux.js')
+  script(src='/lodash/lodash.min.js')
+  script(src='/axios/axios.min.js')
+  link(rel='stylesheet', href='/css/main_1440.css')
+
+append main 
+  include ./blocks/Breadcrumbs
+  include ./blocks/Separator
+  include ./blocks/ItemAndBranchContainer
+  include ./blocks/LastCommitInfo
+  .ViewSelectorContainer
+    include ./blocks/ViewSelector
+    .SearchContainer
+      input.SearchContainer-Input(id='search-container')
+  .InfoTable(id='info-table')
+
+append body_end
+  script.
+    window.repositoryId = "#{repositoryId}";
+  script(src='/js/main.js')

@@ -8,9 +8,9 @@
       "type": "node",
       "request": "launch",
       "name": "Launch Program",
-      "program": "${workspaceFolder}\\src\\server.js",
+      "program": "${workspaceFolder}\\src\\backend\\server.js",
       "args": [
-        "C:\\Muxa\\Helper"
+        "C:\\Muxa\\SHRI\\homework"
       ]
     },
     {
