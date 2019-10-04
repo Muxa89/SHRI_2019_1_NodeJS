@@ -30,29 +30,39 @@ function getGitDir(folder, callback) {
   });
 }
 
-function getAllRepositories(root, resultCallback) {
-  fs.readdir(root, (err, files) => {
-    async.filter(
-      files,
-      (file, truthCallback) => {
-        fs.stat(path.resolve(root, file), (err, stat) => {
-          truthCallback(null, stat.isDirectory());
-        });
-      },
-      (err, folders) => {
-        async.filter(
-          folders,
-          (folder, truthCallback) => {
-            getGitDir(path.resolve(root, folder), (err, out) => {
-              truthCallback(null, !err);
-            });
-          },
-          (err, repos) => {
-            resultCallback(repos);
-          }
-        );
+function getGitDirPromise(folder) {
+  return new Promise((resolve, reject) => {
+    execFile('git', ['-C', folder, 'rev-parse', '--git-dir'], (err, out) => {
+      if (err) {
+        return reject(err);
       }
-    );
+
+      resolve(out.replace(/^\s|\s$/g, ''));
+    });
+  });
+}
+
+function getAllRepositories(root, callback) {
+  fs.readdir(root, { withFileTypes: true }, (err, files) => {
+    const folders = files
+      .filter(file => file.isDirectory())
+      .map(file => file.name);
+
+    const res = [];
+
+    Promise.all(
+      folders.map(folder =>
+        getGitDirPromise(path.resolve(root, folder))
+          .then(() => {
+            res.push(folder);
+          })
+          .catch(() => {})
+          .finally(() => Promise.resolve())
+      )
+    ).then(() => {
+      res.sort();
+      callback(res);
+    });
   });
 }
 
